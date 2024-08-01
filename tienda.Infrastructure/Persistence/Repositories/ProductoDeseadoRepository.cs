@@ -44,13 +44,19 @@ namespace tienda.Infrastructure.Persistence.Repositories
 
         public IEnumerable<ProductoDTO> ProductoDeseado()
         {
-            return _context.Productos.Select(p => new ProductoDTO()
+            var productos = _context.Productos.ToList();
+
+            var productosDTO = productos.Select(p => new ProductoDTO()
             {
                 Id = p.Id,
                 Nombre = p.Nombre,
-                Categoria = _context.Categorias.Find(_context.Categorias.Find(p.CategoriaId)).Nombre
+                Categoria = _context.Categorias.Find(p.CategoriaId)?.Nombre,
+                CantidadFavoritos = _context.ProductosDeseados.Count(x => x.ProductId == p.Id)
             }).ToList();
+
+            return productosDTO;
         }
+
 
         public IEnumerable<ProductoDTO> ProductoDeseadosPorUsuario(string user)
         {
