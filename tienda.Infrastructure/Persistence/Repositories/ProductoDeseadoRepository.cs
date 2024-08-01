@@ -46,15 +46,23 @@ namespace tienda.Infrastructure.Persistence.Repositories
         {
             var productos = _context.Productos.ToList();
 
-            var productosDTO = productos.Select(p => new ProductoDTO()
+            var p = productos.Select(p => new
             {
                 Id = p.Id,
                 Nombre = p.Nombre,
                 Categoria = _context.Categorias.Find(p.CategoriaId)?.Nombre,
-                CantidadFavoritos = _context.ProductosDeseados.Count(x => x.ProductId == p.Id)
-            }).ToList();
+                CantidadFavoritos = _context.ProductosDeseados.Count(x => x.ProductId == p.Id),
+                Promedio = _context.Productos.Where(x => x.Id == p.Id).Select(x => x.Stock).Average()
+            }).ToList().Where(y => y.CantidadFavoritos > 0);
 
-            return productosDTO;
+            return p.Select(x => new ProductoDTO()
+            {
+                ArribaPromedio = x.Promedio > x.CantidadFavoritos,
+                CantidadFavoritos = x.CantidadFavoritos,
+                Id = x.Id,
+                Nombre = x.Nombre,
+                Categoria = x.Categoria
+            });
         }
 
 

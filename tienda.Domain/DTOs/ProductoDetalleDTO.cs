@@ -12,7 +12,7 @@ namespace tienda.Domain.DTOs
         public string Nombre { get; set; }
         public string Categoria { get; set; }
         public string Descripcion { get; set; }
-        public string Stock { get; set; }
+        public int Stock { get; set; }
         public int CantidadDeseados { get; set; }
 
     }

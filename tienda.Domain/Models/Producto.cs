@@ -12,6 +12,6 @@ namespace tienda.Domain.Models
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
         public int CategoriaId { get; set; }
-        public string Stock { get; set; }
+        public int Stock { get; set; }
     }
 }

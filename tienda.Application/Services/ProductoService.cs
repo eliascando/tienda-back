@@ -16,7 +16,11 @@ namespace tienda.Application.Services
         private readonly IBaseRepository<Categoria> _repoC;
         private readonly IProductoDeseadoRepository<ProductoDeseado, ProductoDTO> _repoD;
 
-        public ProductoService(IProductoRepository<Producto> repo, IBaseRepository<Categoria> repoC, IProductoDeseadoRepository<ProductoDeseado, ProductoDTO> repoD)
+        public ProductoService(
+            IProductoRepository<Producto> repo, 
+            IBaseRepository<Categoria> repoC, 
+            IProductoDeseadoRepository<ProductoDeseado, ProductoDTO> repoD
+        )
         {
             _repo = repo;
             _repoC = repoC;

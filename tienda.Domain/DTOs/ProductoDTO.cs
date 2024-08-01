@@ -12,5 +12,6 @@ namespace tienda.Domain.DTOs
         public string Nombre { get; set; }
         public string Categoria { get; set; }
         public int ? CantidadFavoritos {  get; set; }
+        public bool ? ArribaPromedio {  get; set; }
     }
 }
